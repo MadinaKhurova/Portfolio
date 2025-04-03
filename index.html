@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Madina Khurova - Personal Portfolio" />
+        <meta name="author" content="Madina Khurova" />
+        <title>Madina Khurova - Portfolio</title>
+        <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.1/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <style>
+            /* Global site color */
+            body {
+                background-color: #A3C5D9;
+            }
+            
+            /* Parallax effect for the header */
+            .parallax {
+                background-image: url('assets/ai.jpg.avif');
+                min-height: 600px; /* Increased height for better proportions */
+                background-attachment: fixed;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+                position: relative;
+                overflow: hidden; /* Ensure the floating elements stay within */
+            }
+            
+            /* Remove the blue overlay that was previously here */
+            
+            .parallax-content {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+                color: white;
+                width: 100%;
+                z-index: 2;
+            }
+            
+            /* Positioned person image - much larger now */
+            .person-image {
+                position: absolute;
+                bottom: -100px;
+                right: 50px;
+                width: 33%; /* 1/3 of the width */
+                height: auto;
+                z-index: 10;
+                transition: transform 0.3s ease-out;
+            }
+            
+            /* Set all section backgrounds to the blue color */
+            .page-section {
+                background-color: #D1DCE5 !important;
+            }
+            
+            .bg-light {
+                background-color: #A3C5D9 !important;
+            }
+            
+            /* Larger welcome text */
+            .masthead-subheading {
+                font-size: 2.5rem !important;
+                margin-bottom: 1.5rem !important;
+                font-weight: 400;
+            }
+            
+            .masthead-heading {
+                font-size: 3.5rem !important;
+                font-weight: 700 !important;
+                margin-bottom: 2rem !important;
+            }
+            
+            /* Logo styling - white color */
+            .navbar-brand {
+                color: #ffffff !important;
+                font-weight: 700;
+                letter-spacing: 0.5px;
+            }
+            
+            /* Footer styling */
+            .footer {
+                background-color: #2c3e50 !important; /* Darker background for footer */
+            }
+            
+            /* JavaScript will be used to move this element on scroll */
+            
+            /* Flip Card Styles */
+            .flip-card {
+                background-color: transparent;
+                width: 100%;
+                height: 300px;
+                perspective: 1000px;
+                margin-bottom: 30px;
+            }
+            
+            .flip-card-inner {
+                position: relative;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                transition: transform 0.6s;
+                transform-style: preserve-3d;
+                box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            }
+            
+            .flip-card:hover .flip-card-inner {
+                transform: rotateY(180deg);
+            }
+            
+            .flip-card-front, .flip-card-back {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                border-radius: 4px;
+            }
+            
+            .flip-card-front {
+                background-color: #fff;
+            }
+            
+            .flip-card-front img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 4px;
+            }
+            
+            .flip-card-back {
+                background-color: #2c3e50;
+                color: white;
+                transform: rotateY(180deg);
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                padding: 20px;
+            }
+            
+            .flip-card-back h3 {
+                margin-bottom: 10px;
+                font-size: 1.5rem;
+            }
+            
+            .flip-card-back p {
+                font-size: 0.9rem;
+            }
+            
+            /* New 3D Card Styles */
+            .cards-container {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            
+            .card {
+                position: relative;
+                width: 100%;
+                height: 400px;
+                margin-bottom: 30px;
+                perspective: 1500px;
+            }
+            
+            .content {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                transform-style: preserve-3d;
+                transition: transform 0.8s cubic-bezier(0.75, 0, 0.85, 1);
+            }
+            
+            .card:hover .content {
+                transform: rotateY(180deg);
+            }
+            
+            .front, .back {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                backface-visibility: hidden;
+                transform-style: preserve-3d;
+                border-radius: 8px;
+            }
+            
+            .front {
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            
+            .front::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 50%);
+                border-radius: 8px;
+            }
+            
+            .front .inner {
+                width: 100%;
+                height: 100%;
+                padding: 30px;
+                position: absolute;
+                bottom: 0;
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+            
+            .front h2 {
+                font-size: 22px;
+                margin-bottom: 5px;
+            }
+            
+            .front .rating {
+                margin-bottom: 10px;
+            }
+            
+            .back {
+                transform: rotateY(180deg);
+                background-color: #2c3e50;
+                color: #fff;
+                padding: 30px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+            }
+            
+            .back .inner {
+                display: flex;
+                flex-direction: column;
+                height: 100%;
+            }
+            
+            .info {
+                display: flex;
+                align-items: center;
+                margin-bottom: 15px;
+            }
+            
+            .info span {
+                font-size: 20px;
+                margin-right: 10px;
+                font-weight: bold;
+            }
+            
+            .info .icon {
+                display: flex;
+                align-items: center;
+            }
+            
+            .info .icon i {
+                margin-right: 5px;
+            }
+            
+            .description {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                font-size: 14px;
+                line-height: 1.5;
+                flex-grow: 1;
+            }
+            
+            .tech-tags {
+                display: flex;
+                flex-wrap: wrap;
+                margin-top: 10px;
+            }
+            
+            .tech-tags .badge {
+                margin-right: 5px;
+                margin-bottom: 5px;
+                padding: 5px 10px;
+                background-color: rgba(255,255,255,0.2);
+                border-radius: 4px;
+                font-size: 12px;
+            }
+            
+            /* New Education Section Styles */
+            .education-container {
+                padding: 30px 0;
+            }
+            
+            .education-card {
+                background-color: #fff;
+                border-radius: 8px;
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                padding: 25px;
+                margin-bottom: 30px;
+                position: relative;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            
+            .education-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            }
+            
+            .education-card .year {
+                display: inline-block;
+                background-color: #2c3e50;
+                color: white;
+                padding: 8px 16px;
+                border-radius: 30px;
+                font-size: 14px;
+                font-weight: 700;
+                margin-bottom: 15px;
+            }
+            
+            .education-card .degree {
+                font-size: 22px;
+                font-weight: 700;
+                margin-bottom: 10px;
+                color: #2c3e50;
+            }
+            
+            .education-card .institution {
+                font-size: 16px;
+                color: #4a5568;
+                margin-bottom: 15px;
+                font-weight: 600;
+            }
+            
+            .education-card .description {
+                color: #718096;
+                font-size: 15px;
+                line-height: 1.6;
+            }
+            
+            .education-card .achievements {
+                margin-top: 15px;
+                padding-top: 15px;
+                border-top: 1px solid #e2e8f0;
+            }
+            
+            .education-card .achievements h4 {
+                font-size: 16px;
+                margin-bottom: 10px;
+                color: #2c3e50;
+            }
+            
+            .education-card .achievements ul {
+                padding-left: 20px;
+            }
+            
+            .education-card .achievements li {
+                margin-bottom: 5px;
+                color: #718096;
+            }
+            
+            .education-icon {
+                position: absolute;
+                top: 25px;
+                right: 25px;
+                font-size: 26px;
+                color: #A3C5D9;
+            }
+            
+            /* New Contact Section Styles */
+            .contact-section {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .contact-container {
+                padding: 50px 0;
+            }
+            
+            .contact-info-container {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                padding: 40px;
+                height: 100%;
+            }
+            
+            .contact-form-container {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                padding: 40px;
+                height: 100%;
+            }
+            
+            .contact-info-item {
+                display: flex;
+                align-items: flex-start;
+                margin-bottom: 25px;
+            }
+            
+            .contact-info-icon {
+                width: 50px;
+                height: 50px;
+                background-color: #A3C5D9;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 20px;
+                margin-right: 15px;
+                flex-shrink: 0;
+            }
+            
+            .contact-info-content h5 {
+                margin: 0 0 5px 0;
+                color: #2c3e50;
+                font-size: 18px;
+                font-weight: 600;
+            }
+            
+            .contact-info-content p {
+                margin: 0;
+                color: #718096;
+                font-size: 16px;
+            }
+            
+            .contact-form .form-group {
+                margin-bottom: 25px;
+            }
+            
+            .contact-form label {
+                font-weight: 600;
+                color: #2c3e50;
+                display: block;
+                margin-bottom: 8px;
+            }
+            
+            .contact-form .form-control {
+                height: 52px;
+                border: 2px solid #e2e8f0;
+                border-radius: 8px;
+                padding: 10px 15px;
+                font-size: 16px;
+                transition: all 0.3s ease;
+            }
+            
+            .contact-form .form-control:focus {
+                outline: none;
+                border-color: #A3C5D9;
+                box-shadow: 0 0 0 3px rgba(163, 197, 217, 0.25);
+            }
+            
+            .contact-form textarea.form-control {
+                height: 140px;
+                resize: none;
+            }
+            
+            .contact-form .btn-submit {
+                background-color: #2c3e50;
+                color: white;
+                border: none;
+                border-radius: 8px;
+                padding: 15px 30px;
+                font-size: 16px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                width: 100%;
+            }
+            
+            .contact-form .btn-submit:hover {
+                background-color: #1a202c;
+                transform: translateY(-2px);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+            
+            .contact-social {
+                display: flex;
+                margin-top: 30px;
+            }
+            
+            .contact-social a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background-color: #A3C5D9;
+                color: white;
+                margin-right: 10px;
+                transition: all 0.3s ease;
+            }
+            
+            .contact-social a:hover {
+                background-color: #2c3e50;
+                transform: translateY(-3px);
+            }
+            
+            .section-title {
+                margin-bottom: 50px;
+            }
+            
+            .section-title h2 {
+                font-size: 36px;
+                font-weight: 700;
+                color: #2c3e50;
+                margin-bottom: 15px;
+            }
+            
+            .section-title p {
+                font-size: 18px;
+                color: #718096;
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        </style>
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll-trigger" href="#page-top">Madina Khurova</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    Menu
+                    <i class="fas fa-bars ml-1"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav text-uppercase ml-auto">
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#skills">Skills</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#projects">Projects</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#education">Education</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#favorites">Favorites</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header with Parallax Effect-->
+        <header class="parallax">
+            <div class="parallax-content">
+                <div class="masthead-subheading">Welcome to My Portfolio</div>
+                <div class="masthead-heading text-uppercase">Madina Khurova</div>
+                <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="#skills">Discover More</a>
+            </div>
+            <img src="assets/person.png" alt="Person Image" class="person-image" id="personImage" />
+        </header>
+        <!-- Skills Section-->
+        <section class="page-section" id="skills">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Skills</h2>
+                    <h3 class="section-subheading text-muted">Core competencies and technologies</h3>
+                </div>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-code fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Programming Languages</h4>
+                        <p class="text-muted">Python, JavaScript, Java, C#, SQL</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-laptop-code fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Web Development</h4>
+                        <p class="text-muted">HTML5, CSS3, React, Node.js, Bootstrap</p>
+                    </div>
+                    <div class="col-md-4">
+                        <span class="fa-stack fa-4x">
+                            <i class="fas fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fas fa-database fa-stack-1x fa-inverse"></i>
+                        </span>
+                        <h4 class="my-3">Tools & Technologies</h4>
+                        <p class="text-muted">Git, Docker, Unity, AWS, MongoDB/p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Projects Section-->
+        <section class="page-section bg-light" id="projects">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Projects</h2>
+                    <h3 class="section-subheading text-muted">Recent coding projects</h3>
+                </div>
+                <div class="row cards-container">
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="front" style="background-image: url('assets/img/portfolio/game3.jpeg')">
+                                    <div class="inner">
+                                        <h2>Safari - Management Game</h2>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="inner">
+                                        <div class="info">
+                                            <span>Unity</span>
+                                            <div class="icon">
+                                                <i class="fas fa-gamepad"></i>
+                                                <span>Platform</span>
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <span>C#</span>
+                                            <div class="icon">
+                                                <i class="fas fa-code"></i>
+                                                <span>Language</span>
+                                            </div>
+                                        </div>
+                                        <div class="description">
+                                            <p>"Safari" is a 2D management simulation game where players run their own safari park. Players must purchase animals, acquire jeeps for tourists, and balance their capital while ensuring the well-being of both animals and visitors.</p>
+                                            <p>Developed in C# using Unity, the game features resource management, economic simulation, and visitor satisfaction mechanics.</p>
+                                        </div>
+                                        <div class="tech-tags">
+                                            <span class="badge">Unity</span>
+                                            <span class="badge">C#</span>
+                                            <span class="badge">2D Game</span>
+                                            <span class="badge">Simulation</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="front" style="background-image: url('assets/img/portfolio/book.jpeg')">
+                                    <div class="inner">
+                                        <h2>e-Library System</h2>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="inner">
+                                        <div class="info">
+                                            <span>PHP</span>
+                                            <div class="icon">
+                                                <i class="fab fa-php"></i>
+                                                <span>Language</span>
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <span>MySQL</span>
+                                            <div class="icon">
+                                                <i class="fas fa-database"></i>
+                                                <span>Database</span>
+                                            </div>
+                                        </div>
+                                        <div class="description">
+                                            <p>A server-side application written in PHP where users can give feedback on books and mark them as read. Features user authentication, book listings, user profiles, and admin functions.</p>
+                                            <p><a href="https://github.com/MadinaKhurova/Website-to-catalogue-the-books" target="_blank" style="color: white; text-decoration: underline;"><i class="fab fa-github"></i> View Code</a></p>
+                                        </div>
+                                        <div class="tech-tags">
+                                            <span class="badge">PHP</span>
+                                            <span class="badge">MySQL</span>
+                                            <span class="badge">CSS</span>
+                                            <span class="badge">HTML</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card">
+                            <div class="content">
+                                <div class="front" style="background-image: url('assets/img/portfolio/store.jpeg')">
+                                    <div class="inner">
+                                        <h2>Technical Store Website</h2>
+                                        <div class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="back">
+                                    <div class="inner">
+                                        <div class="info">
+                                            <span>Frontend</span>
+                                            <div class="icon">
+                                                <i class="fab fa-html5"></i>
+                                                <span>HTML/CSS/JS</span>
+                                            </div>
+                                        </div>
+                                        <div class="info">
+                                            <span>Backend</span>
+                                            <div class="icon">
+                                                <i class="fab fa-node-js"></i>
+                                                <span>Node.js</span>
+                                            </div>
+                                        </div>
+                                        <div class="description">
+                                            <p>A comprehensive e-commerce website for a technical store selling household appliances like TVs and vacuum cleaners. Features user accounts, product listings, inventory management, and secure payment processing.</p>
+                                            <p><a href="https://github.com/MadinaKhurova/HTML-CSS-JS-website" target="_blank" style="color: white; text-decoration: underline;"><i class="fab fa-github"></i> View Code</a></p>
+                                        </div>
+                                        <div class="tech-tags">
+                                            <span class="badge">HTML/CSS/JS</span>
+                                            <span class="badge">Node.js</span>
+                                            <span class="badge">MySQL</span>
+                                            <span class="badge">React</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Education Section-->
+        <section class="page-section" id="education">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Education</h2>
+                    <h3 class="section-subheading text-muted">My academic journey and achievements</h3>
+                </div>
+                <div class="row education-container">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="education-card">
+                            <span class="year">2022-2025</span>
+                            <div class="education-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3 class="degree">Bachelor of Science in Computer Science</h3>
+                            <div class="institution">Eötvös Loránd University, Budapest, Hungary</div>
+                            <p class="description">Pursuing a Computer Science degree with Stipendium Hungaricum Scholarship.</p>
+                            <div class="achievements">
+                                <h4>Key Achievements:</h4>
+                                <ul>
+                                    <li>GPA: 4.2</li>
+                                    <li>Stipendium Hungaricum Scholarship recipient</li>
+                                    <li>Relevant Coursework: Data Structures, Computer Architecture, Algorithms, Software Engineering, Programming Language Principles, System Programming, Machine Learning</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <div class="education-card">
+                            <span class="year">Feb 15, 2025 - Current</span>
+                            <div class="education-icon">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3 class="degree">Software Development Internship</h3>
+                            <div class="institution">TechCorp</div>
+                            <p class="description">Working as a front-end developer intern, creating and maintaining web applications and interfaces.</p>
+                            <div class="achievements">
+                                <h4>Key Responsibilities:</h4>
+                                <ul>
+                                    <li>Developing different kinds of features using HTML, JavaScript, and CSS</li>
+                                    <li>Creating responsive and user-friendly websites</li>
+                                    <li>Collaborating with design and back-end teams</li>
+                                    <li>Implementing UI/UX improvements and optimizations</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Favorites Section-->
+        <section class="page-section bg-light" id="favorites">
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="section-heading text-uppercase">Favorites</h2>
+                    <h3 class="section-subheading text-muted">Things I love and enjoy</h3>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <i class="fas fa-hiking fa-4x text-primary mb-3"></i>
+                            <h4>Activities</h4>
+                            <p class="text-muted">Hiking, Photography, Reading Tech Blogs, Playing Chess</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <i class="fas fa-utensils fa-4x text-primary mb-3"></i>
+                            <h4>Food</h4>
+                            <p class="text-muted">Sushi, Italian Cuisine, Street Food, Coffee</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="team-member">
+                            <i class="fas fa-futbol fa-4x text-primary mb-3"></i>
+                            <h4>Sports</h4>
+                            <p class="text-muted">Basketball, Swimming, Tennis, Yoga</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+        <section class="page-section contact-section" id="contact">
+            <div class="container contact-container">
+                <div class="section-title text-center">
+                    <h2 class="text-uppercase">Get In Touch</h2>
+                    <p>Feel free to reach out for projects, collaboration, or just to say hello!</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-5 mb-4 mb-lg-0">
+                        <div class="contact-info-container">
+                            <h3 class="mb-4">Contact Information</h3>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div class="contact-info-content">
+                                    <h5>Location</h5>
+                                    <p>Budapest, Hungary</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="contact-info-content">
+                                    <h5>Email</h5>
+                                    <p>madina.khurova.tech@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-phone-alt"></i>
+                                </div>
+                                <div class="contact-info-content">
+                                    <h5>Phone</h5>
+                                    <p>+36 70 671 8182</p>
+                                </div>
+                            </div>
+                            <div class="contact-info-item">
+                                <div class="contact-info-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="contact-info-content">
+                                    <h5>Working Hours</h5>
+                                    <p>Monday-Friday: 9am - 5pm</p>
+                                </div>
+                            </div>
+                            <div class="contact-social">
+                                <a href="https://github.com/MadinaKhurova" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                                <a href="https://www.linkedin.com/in/madina-khurova-974088252/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.instagram.com/_username0402/?next=%2F" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                                <a href="https://www.facebook.com/profile.php?id=100016758031535" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="contact-form-container">
+                            <h3 class="mb-4">Send Me a Message</h3>
+                            <form class="contact-form" id="contactForm">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="name">Your Name</label>
+                                            <input type="text" class="form-control" id="name" placeholder="John Doe" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="email">Your Email</label>
+                                            <input type="email" class="form-control" id="email" placeholder="example@email.com" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Project Discussion" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea class="form-control" id="message" placeholder="Your message..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn-submit">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <footer class="footer py-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-4 text-lg-left">Copyright © Madina Khurova 2024</div>
+                    <div class="col-lg-4 my-3 my-lg-0">
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-github"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-linkedin-in"></i></a>
+                        <a class="btn btn-dark btn-social mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                    </div>
+                    <div class="col-lg-4 text-lg-right">
+                        <a class="mr-3" href="#!">Privacy Policy</a>
+                        <a href="#!">Terms of Use</a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Third party plugin JS-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <!-- Contact form JS-->
+        <script src="assets/mail/jqBootstrapValidation.js"></script>
+        <script src="assets/mail/contact_me.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        
+        <!-- Script for the moving image effect -->
+        <script>
+            // Function to move the person image down as user scrolls down
+            window.addEventListener('scroll', function() {
+                const scrollPosition = window.scrollY;
+                const personImage = document.getElementById('personImage');
+                
+                if (scrollPosition < 500) {
+                    // Move the image downward as the user scrolls down (positive values move it down)
+                    const moveDownValue = scrollPosition * 0.3; // Adjusted multiplier for downward movement
+                    personImage.style.transform = `translateY(${moveDownValue}px)`;
+                }
+            });
+        </script>
+    </body>
+</html>
